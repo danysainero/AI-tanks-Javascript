@@ -77,6 +77,20 @@ async function main(tank) {
 
   async function scanController(angle, tank) {
     let scanResult = await tank.scan((angle), MAX_SCAN_ANGLE);
+    await shootController(tank, scanResult, angle)
+  }
+
+  async function shootController(tank, scanResult, angle) {
+    console.log(scanResult);
+    
+     if (scanResult > 0 && scanResult > 250) {
+        
+      await tank.shoot(angle, scanResult) 
+    } else {
+      await tank.shoot(angle, 700) 
+    }
+
+    
   }
 
   // main loop
